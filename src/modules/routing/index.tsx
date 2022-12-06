@@ -1,36 +1,33 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Layout } from '../layout';
 import LoginPage from '../login/LoginPage';
 import DashboardPage from '../dashboard/Dashboard';
 import RequestPage from '../request/RequestPage';
-// import RequireAuth from './require-auth';
+import RequireAuth from './require-auth';
 
 function MainRouter() {
   return (
     <Routes>
-      <Route element={<Layout />}>
-        <Route
-          index
-          path="/"
-          element={
-            // <RequireAuth>
+      <Route path="/login" element={<LoginPage />} />
+
+      <Route
+        path="/dushboard"
+        element={
+          <RequireAuth>
             <DashboardPage />
-            // </RequireAuth>
-          }
-        />
+          </RequireAuth>
+        }
+      />
 
-        <Route path="login" element={<LoginPage />} />
-
-        <Route
-          path="request"
-          element={
-            // <RequireAuth>
+      <Route
+        path="/vacation"
+        element={
+          <RequireAuth>
             <RequestPage />
-            // </RequireAuth>
-          }
-        />
-      </Route>
-      <Route path="*" element={<Navigate to="/" />} />
+          </RequireAuth>
+        }
+      />
+
+      <Route path="*" element={<Navigate to="/login" />} />
     </Routes>
   );
 }

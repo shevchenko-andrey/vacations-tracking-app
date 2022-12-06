@@ -1,3 +1,9 @@
+import { Layout } from '../layout';
+
 export default function DashboardPage() {
-  return <div>DashboardPage</div>;
+  return (
+    <Layout title="Dashboard">
+      <div>DashboardPage</div>
+    </Layout>
+  );
 }

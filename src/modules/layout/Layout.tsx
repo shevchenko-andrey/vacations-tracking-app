@@ -1,22 +1,24 @@
-import { Navigate, Outlet } from 'react-router-dom';
 import { Header } from './components/Header';
-import { useAuth } from '../../hooks/useAuth';
+import { useUserContext } from '../../contexts/UserContext';
 
-export const Layout = () => {
-  const { user, isLogin, handleLogOut } = useAuth();
+interface ILayoutProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+export const Layout = ({ title, children }: ILayoutProps) => {
+  const { email, handleLogOut, isLoggedIn } = useUserContext();
 
   return (
     <>
       <Header
-        auth={isLogin}
-        user={user}
+        auth={isLoggedIn}
+        email={email}
         handleLogOut={handleLogOut}
-        title="Dushboard"
+        title={title}
       />
-      <main>
-        <Outlet />
-      </main>
-      {isLogin && <Navigate to="/login" />}
+
+      <main>{children}</main>
     </>
   );
 };
