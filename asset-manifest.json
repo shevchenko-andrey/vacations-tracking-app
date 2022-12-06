@@ -1,12 +1,15 @@
 {
   "files": {
-    "main.js": "/vacations-tracking-app/static/js/main.320f57c1.js",
+    "main.css": "/vacations-tracking-app/static/css/main.9821b62c.css",
+    "main.js": "/vacations-tracking-app/static/js/main.8ae78e0f.js",
     "static/js/787.abc116ff.chunk.js": "/vacations-tracking-app/static/js/787.abc116ff.chunk.js",
     "index.html": "/vacations-tracking-app/index.html",
-    "main.320f57c1.js.map": "/vacations-tracking-app/static/js/main.320f57c1.js.map",
+    "main.9821b62c.css.map": "/vacations-tracking-app/static/css/main.9821b62c.css.map",
+    "main.8ae78e0f.js.map": "/vacations-tracking-app/static/js/main.8ae78e0f.js.map",
     "787.abc116ff.chunk.js.map": "/vacations-tracking-app/static/js/787.abc116ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.320f57c1.js"
+    "static/css/main.9821b62c.css",
+    "static/js/main.8ae78e0f.js"
   ]
 }
