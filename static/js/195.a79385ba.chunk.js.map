@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/195.a79385ba.chunk.js","mappings":"+LAAe,SAASA,IACtB,OAAO,oCACT,C","sources":["screens/request/index.jsx"],"sourcesContent":["export default function RequestPage() {\n  return <div>Request</div>;\n}\n"],"names":["RequestPage"],"sourceRoot":""}
