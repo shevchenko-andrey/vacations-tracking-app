@@ -2,28 +2,28 @@ import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import Toolbar from '@mui/material/Toolbar';
-import { IUser } from '../../../interfaces/IUser';
+import { Box, Button, Popover, Avatar } from '@mui/material';
 
-interface IProps {
+interface IHeaderProps {
   auth: boolean;
   title: string;
-  user: IUser | null;
+  email: string;
   handleLogOut: () => void;
 }
 
-export const Header = ({ title, auth, user, handleLogOut }: IProps) => {
+export const Header = ({ title, auth, email, handleLogOut }: IHeaderProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setIsOpen(true);
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+    setIsOpen(false);
   };
 
   return (
@@ -47,26 +47,33 @@ export const Header = ({ title, auth, user, handleLogOut }: IProps) => {
               onClick={handleMenu}
               color="inherit"
             >
-              <AccountCircle />
+              <Avatar sx={{ bgcolor: '#74gfhg' }}>
+                {email[0].toUpperCase()}
+              </Avatar>
             </IconButton>
-            <Menu
-              id="menu-appbar"
+            <Popover
+              open={isOpen}
               anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorEl)}
               onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
             >
-              <MenuItem>{user?.email}</MenuItem>
-              <MenuItem onClick={handleLogOut}>Logout</MenuItem>
-            </Menu>
+              <Box p="20px">
+                <Typography>{email}</Typography>
+                <Box
+                  color="primary"
+                  display="flex"
+                  justifyContent="center"
+                  width={'100%'}
+                >
+                  <Button title="Logout" onClick={handleLogOut}>
+                    Logout
+                  </Button>
+                </Box>
+              </Box>
+            </Popover>
           </div>
         )}
       </Toolbar>
