@@ -5,14 +5,14 @@ import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import { Box, Button, Popover, Avatar } from '@mui/material';
 
-interface IProps {
+interface IHeaderProps {
   auth: boolean;
   title: string;
   email: string;
   handleLogOut: () => void;
 }
 
-export const Header = ({ title, auth, email, handleLogOut }: IProps) => {
+export const Header = ({ title, auth, email, handleLogOut }: IHeaderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 

@@ -1,5 +1,5 @@
-import { Header } from './components/Header';
-import { useUserContext } from '../../contexts/UserContext';
+import { Header } from './Header';
+import { useUserContext } from '../contexts/UserContext';
 
 interface ILayoutProps {
   title: string;

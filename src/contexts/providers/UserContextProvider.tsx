@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IUser, IUserForm } from '../../interfaces/user.interfaces';
+import { IUser, IUserForm } from '../../models/user.models';
 import { UserContext } from '../UserContext';
 
 interface IProviderProps {

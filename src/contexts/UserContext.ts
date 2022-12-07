@@ -1,4 +1,4 @@
-import { IUserData } from './../interfaces/user.interfaces';
+import { IUserData } from '../models/user.models';
 import { createContext, useContext } from 'react';
 
 export const UserContext = createContext<IUserData>({
