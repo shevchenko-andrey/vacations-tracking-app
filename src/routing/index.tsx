@@ -1,34 +1,38 @@
+import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import LoginPage from '../login/LoginPage';
-import DashboardPage from '../dashboard/Dashboard';
-import RequestPage from '../request/RequestPage';
 import RequireAuth from './require-auth';
+
+const LoginPage = lazy(() => import('../screens/login'));
+const DashboardPage = lazy(() => import('../screens/dashboard'));
+const RequestPage = lazy(() => import('../screens/request'));
 
 function MainRouter() {
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
+    <Suspense fallback="">
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
 
-      <Route
-        path="/dushboard"
-        element={
-          <RequireAuth>
-            <DashboardPage />
-          </RequireAuth>
-        }
-      />
+        <Route
+          path="/dushboard"
+          element={
+            <RequireAuth>
+              <DashboardPage />
+            </RequireAuth>
+          }
+        />
 
-      <Route
-        path="/vacation"
-        element={
-          <RequireAuth>
-            <RequestPage />
-          </RequireAuth>
-        }
-      />
+        <Route
+          path="/vacation"
+          element={
+            <RequireAuth>
+              <RequestPage />
+            </RequireAuth>
+          }
+        />
 
-      <Route path="*" element={<Navigate to="/login" />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/login" />} />
+      </Routes>
+    </Suspense>
   );
 }
 

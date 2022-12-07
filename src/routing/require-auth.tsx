@@ -1,5 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useUserContext } from '../../contexts/UserContext';
+import { useUserContext } from '../contexts/UserContext';
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const { isLoggedIn } = useUserContext();
