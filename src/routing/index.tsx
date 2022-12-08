@@ -2,9 +2,9 @@ import { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import RequireAuth from './require-auth';
 
-const LoginPage = lazy(() => import('../screens/login'));
-const DashboardPage = lazy(() => import('../screens/dashboard'));
-const RequestPage = lazy(() => import('../screens/request'));
+const LoginPage = lazy(() => import('../screens/Login'));
+const DashboardPage = lazy(() => import('../screens/Dashboard'));
+const RequestPage = lazy(() => import('../screens/Request'));
 
 function MainRouter() {
   return (
@@ -22,7 +22,7 @@ function MainRouter() {
         />
 
         <Route
-          path="/vacation"
+          path="/vacation/request"
           element={
             <RequireAuth>
               <RequestPage />
