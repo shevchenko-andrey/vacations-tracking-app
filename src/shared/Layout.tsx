@@ -1,5 +1,6 @@
 import { Header } from './Header';
 import { useUserContext } from '../contexts/UserContext';
+import { Container } from '@mui/material';
 
 interface ILayoutProps {
   title: string;
@@ -18,7 +19,7 @@ export const Layout = ({ title, children }: ILayoutProps) => {
         title={title}
       />
 
-      <main>{children}</main>
+      <Container component="main">{children}</Container>
     </>
   );
 };
