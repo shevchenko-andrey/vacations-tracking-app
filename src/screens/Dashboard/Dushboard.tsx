@@ -1,7 +1,9 @@
 import React, { SetStateAction, useState } from 'react';
+import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import { Layout } from '../../shared/Layout';
 import { FilterMod, ViewMod } from './Dushboard.models';
+
 import {
   ToggleButton,
   ToggleButtonGroup,
@@ -56,7 +58,13 @@ export default function Dashboard() {
             </ToggleButtonGroup>
           </Box>
           <Box>
-            <Fab color="primary" variant="extended" aria-label="add">
+            <Fab
+              component={Link}
+              to="/vacation/request"
+              color="primary"
+              variant="extended"
+              aria-label="add"
+            >
               <AddIcon />
               <Box pr="20px" pl="20px">
                 <Typography>New request</Typography>
