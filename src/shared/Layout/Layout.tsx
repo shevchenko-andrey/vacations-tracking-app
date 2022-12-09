@@ -1,5 +1,5 @@
-import { Header } from './Header';
-import { useUserContext } from '../contexts/UserContext';
+import { Header } from '../Header';
+import { useUserContext } from '../../contexts/UserContext';
 import { Container } from '@mui/material';
 
 interface ILayoutProps {

@@ -16,7 +16,7 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().min(4).max(8).required(),
 });
 
-export default function LoginPage() {
+export default function Login() {
   const { handleLogin, isLoggedIn } = useUserContext();
 
   const formik = useFormik({
