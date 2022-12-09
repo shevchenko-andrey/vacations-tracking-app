@@ -27,9 +27,12 @@ export const getRequests = async ({ filter }: IRequestOptions) => {
   }
 };
 
-export const addRequests = async (request: IRequest) => {
+export const addNewRequest = async (request: IRequest) => {
   const allRequests = await getRequests({});
-  const newRequests = [...allRequests, request];
+  const newRequests = [
+    ...allRequests,
+    { ...request, id: moment(request.endDate).unix() },
+  ];
   localStorage.setItem('requests', JSON.stringify(newRequests));
   return request;
 };
