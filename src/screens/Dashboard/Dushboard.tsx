@@ -1,35 +1,32 @@
+import AddIcon from '@mui/icons-material/Add';
 import React, { SetStateAction, useState } from 'react';
 import { Link } from 'react-router-dom';
-import AddIcon from '@mui/icons-material/Add';
 import { Layout } from '../../shared/Layout';
-import { FilterMod, ViewMod } from './Dushboard.models';
-
-import {
-  ToggleButton,
-  ToggleButtonGroup,
-  Box,
-  Fab,
-  Typography,
-  Button,
-} from '@mui/material';
-
+import { DushboardFilterMod, DashboardDataView } from './Dushboard.models';
+import { Box, Fab, Typography, Button } from '@mui/material';
 import { DushBoardTableView } from './DushboardTableView';
+import { DushBoardCalendarView } from './DushboardCalendarView';
+import { DushboardTogglePannel } from './DushboardTogglePannel';
 
-export default function Dashboard() {
-  const [filter, setFilter] = useState(FilterMod.ACTUAL);
-  const [selectedView, setSelectedView] = useState(ViewMod.TABLE_VIEW);
+const Dashboard = () => {
+  // TODO: Add Datapicker
+  // const [selectedDay, setSelectedDay] = useState<Moment>(moment());
+  const [filter, setFilter] = useState(DushboardFilterMod.ACTUAL);
+  const [selectedView, setSelectedView] = useState(
+    DashboardDataView.TABLE_VIEW
+  );
 
-  const handleTogleFilter = (
+  const handleToggleFilter = (
     _: React.MouseEvent<HTMLElement>,
-    filter: SetStateAction<FilterMod>
+    filter: SetStateAction<DushboardFilterMod>
   ) => {
     setFilter(filter);
   };
 
   const handleChangeView = () => {
-    selectedView === ViewMod.TABLE_VIEW
-      ? setSelectedView(ViewMod.CALENDAR_VIEW)
-      : setSelectedView(ViewMod.TABLE_VIEW);
+    selectedView === DashboardDataView.TABLE_VIEW
+      ? setSelectedView(DashboardDataView.CALENDAR_VIEW)
+      : setSelectedView(DashboardDataView.TABLE_VIEW);
   };
 
   return (
@@ -40,23 +37,12 @@ export default function Dashboard() {
           justifyContent={'space-between'}
           alignItems="center"
         >
-          <Box maxWidth={'400px'}>
-            <ToggleButtonGroup
-              fullWidth
-              color="primary"
-              value={filter}
-              exclusive
-              onChange={handleTogleFilter}
-              aria-label="Platform"
-            >
-              <ToggleButton fullWidth value="actual">
-                Actual
-              </ToggleButton>
-              <ToggleButton fullWidth value="history">
-                History
-              </ToggleButton>
-            </ToggleButtonGroup>
-          </Box>
+          {selectedView === DashboardDataView.TABLE_VIEW ? (
+            <DushboardTogglePannel
+              filter={filter}
+              handleToggleFilter={handleToggleFilter}
+            />
+          ) : null}
           <Box>
             <Fab
               component={Link}
@@ -73,16 +59,20 @@ export default function Dashboard() {
           </Box>
           <Box>
             <Button variant="contained" onClick={handleChangeView}>
-              {selectedView}
+              {DashboardDataView.CALENDAR_VIEW}
             </Button>
           </Box>
         </Box>
         <Box overflow="auto" pt="30px" height="400px" width="100%">
-          {selectedView === ViewMod.TABLE_VIEW ? (
+          {selectedView === DashboardDataView.TABLE_VIEW ? (
             <DushBoardTableView filter={filter} />
-          ) : null}
+          ) : (
+            <DushBoardCalendarView />
+          )}
         </Box>
       </Box>
     </Layout>
   );
-}
+};
+
+export default Dashboard;

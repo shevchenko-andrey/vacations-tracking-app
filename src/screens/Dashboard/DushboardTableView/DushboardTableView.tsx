@@ -1,33 +1,53 @@
-import { DataGrid, GridColDef, GridValidRowModel } from '@mui/x-data-grid';
+import moment from 'moment';
+import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Skeleton, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { IRequest } from '../../../models/request.models';
+import { FC, useEffect, useState } from 'react';
+import { IRequestFullData } from '../../../models/request.models';
 import { getRequests } from '../../../service/vacationsRequestService';
-import { FilterMod } from '../Dushboard.models';
+import { DushboardFilterMod } from '../Dushboard.models';
+import { MomentDateTimeFormat } from '../../../models/moment.models';
 
-const TABLE_COLUMNS: GridColDef<GridValidRowModel, string, string>[] = [
+const TABLE_COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'Absence ID', width: 130 },
   { field: 'type', headerName: 'Type', width: 120 },
-  { field: 'startDate', headerName: 'Start Date', width: 130 },
-  { field: 'endDate', headerName: 'End Date', width: 130 },
+  {
+    field: 'startDate',
+    headerName: 'Start Date',
+    width: 130,
+    valueGetter: (
+      params: GridValueGetterParams<GridColDef, IRequestFullData>
+    ) => moment(params.row.startDate).format(MomentDateTimeFormat.DOT_FORMAT),
+  },
+  {
+    field: 'endDate',
+    headerName: 'End Date',
+    width: 130,
+    valueGetter: (
+      params: GridValueGetterParams<GridColDef, IRequestFullData>
+    ) => moment(params.row.endDate).format(MomentDateTimeFormat.DOT_FORMAT),
+  },
   {
     field: 'notes',
     headerName: 'Notes',
-    width: 500,
+    width: 400,
   },
   {
     field: 'actions',
     headerName: 'Actions',
-    width: 130,
+    width: 260,
+    valueGetter: (
+      params: GridValueGetterParams<GridColDef, IRequestFullData>
+    ) =>
+      moment(params.row.actions).format(MomentDateTimeFormat.SPAСE_FULL_FORMAT),
   },
 ];
 
 interface ITableViewProps {
-  filter: FilterMod;
+  filter: DushboardFilterMod;
 }
 
-export const DushBoardTableView = ({ filter }: ITableViewProps) => {
-  const [tableRows, setTableRows] = useState<IRequest[] | []>([]);
+export const DushBoardTableView: FC<ITableViewProps> = ({ filter }) => {
+  const [tableRows, setTableRows] = useState<IRequestFullData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -52,7 +72,7 @@ export const DushBoardTableView = ({ filter }: ITableViewProps) => {
       </Skeleton>
     );
   }
-  if (tableRows.length < 1) {
+  if (tableRows.length === 0) {
     return (
       <Box display="flex" justifyContent="center">
         <Typography>First add data</Typography>
