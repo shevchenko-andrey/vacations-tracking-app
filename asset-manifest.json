@@ -1,31 +1,27 @@
 {
   "files": {
-    "main.css": "/vacations-tracking-app/static/css/main.e9f81467.css",
-    "main.js": "/vacations-tracking-app/static/js/main.cac2cbc4.js",
-    "static/js/772.bf938cfc.chunk.js": "/vacations-tracking-app/static/js/772.bf938cfc.chunk.js",
-    "static/js/43.d06d3d01.chunk.js": "/vacations-tracking-app/static/js/43.d06d3d01.chunk.js",
-    "static/js/184.d15c32e2.chunk.js": "/vacations-tracking-app/static/js/184.d15c32e2.chunk.js",
+    "main.css": "/vacations-tracking-app/static/css/main.9821b62c.css",
+    "main.js": "/vacations-tracking-app/static/js/main.d360d429.js",
+    "static/js/570.5872f6b7.chunk.js": "/vacations-tracking-app/static/js/570.5872f6b7.chunk.js",
+    "static/js/148.ab50cd34.chunk.js": "/vacations-tracking-app/static/js/148.ab50cd34.chunk.js",
+    "static/js/174.1d20b11a.chunk.js": "/vacations-tracking-app/static/js/174.1d20b11a.chunk.js",
     "static/js/787.abc116ff.chunk.js": "/vacations-tracking-app/static/js/787.abc116ff.chunk.js",
-    "static/js/659.708ea105.chunk.js": "/vacations-tracking-app/static/js/659.708ea105.chunk.js",
-    "static/js/986.c1d56365.chunk.js": "/vacations-tracking-app/static/js/986.c1d56365.chunk.js",
-    "static/js/637.6efa1634.chunk.js": "/vacations-tracking-app/static/js/637.6efa1634.chunk.js",
-    "static/js/792.d558bbb1.chunk.js": "/vacations-tracking-app/static/js/792.d558bbb1.chunk.js",
-    "static/js/273.aa411d53.chunk.js": "/vacations-tracking-app/static/js/273.aa411d53.chunk.js",
+    "static/js/606.5753b121.chunk.js": "/vacations-tracking-app/static/js/606.5753b121.chunk.js",
+    "static/js/821.48a3cb4b.chunk.js": "/vacations-tracking-app/static/js/821.48a3cb4b.chunk.js",
+    "static/js/891.a60e4e77.chunk.js": "/vacations-tracking-app/static/js/891.a60e4e77.chunk.js",
     "index.html": "/vacations-tracking-app/index.html",
-    "main.e9f81467.css.map": "/vacations-tracking-app/static/css/main.e9f81467.css.map",
-    "main.cac2cbc4.js.map": "/vacations-tracking-app/static/js/main.cac2cbc4.js.map",
-    "772.bf938cfc.chunk.js.map": "/vacations-tracking-app/static/js/772.bf938cfc.chunk.js.map",
-    "43.d06d3d01.chunk.js.map": "/vacations-tracking-app/static/js/43.d06d3d01.chunk.js.map",
-    "184.d15c32e2.chunk.js.map": "/vacations-tracking-app/static/js/184.d15c32e2.chunk.js.map",
+    "main.9821b62c.css.map": "/vacations-tracking-app/static/css/main.9821b62c.css.map",
+    "main.d360d429.js.map": "/vacations-tracking-app/static/js/main.d360d429.js.map",
+    "570.5872f6b7.chunk.js.map": "/vacations-tracking-app/static/js/570.5872f6b7.chunk.js.map",
+    "148.ab50cd34.chunk.js.map": "/vacations-tracking-app/static/js/148.ab50cd34.chunk.js.map",
+    "174.1d20b11a.chunk.js.map": "/vacations-tracking-app/static/js/174.1d20b11a.chunk.js.map",
     "787.abc116ff.chunk.js.map": "/vacations-tracking-app/static/js/787.abc116ff.chunk.js.map",
-    "659.708ea105.chunk.js.map": "/vacations-tracking-app/static/js/659.708ea105.chunk.js.map",
-    "986.c1d56365.chunk.js.map": "/vacations-tracking-app/static/js/986.c1d56365.chunk.js.map",
-    "637.6efa1634.chunk.js.map": "/vacations-tracking-app/static/js/637.6efa1634.chunk.js.map",
-    "792.d558bbb1.chunk.js.map": "/vacations-tracking-app/static/js/792.d558bbb1.chunk.js.map",
-    "273.aa411d53.chunk.js.map": "/vacations-tracking-app/static/js/273.aa411d53.chunk.js.map"
+    "606.5753b121.chunk.js.map": "/vacations-tracking-app/static/js/606.5753b121.chunk.js.map",
+    "821.48a3cb4b.chunk.js.map": "/vacations-tracking-app/static/js/821.48a3cb4b.chunk.js.map",
+    "891.a60e4e77.chunk.js.map": "/vacations-tracking-app/static/js/891.a60e4e77.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e9f81467.css",
-    "static/js/main.cac2cbc4.js"
+    "static/css/main.9821b62c.css",
+    "static/js/main.d360d429.js"
   ]
 }
