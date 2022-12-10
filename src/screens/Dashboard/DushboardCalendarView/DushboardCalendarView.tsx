@@ -51,6 +51,7 @@ export const DushBoardCalendarView: FC<CalendarViewProps> = ({
           color="#fff"
           bgcolor="#837373"
           minHeight="200px"
+          position="relative"
           key={day.unix()}
         >
           <Box

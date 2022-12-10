@@ -1,3 +1,4 @@
+import { MomentDateTimeFormat } from './../models/moment.models';
 import moment, { Moment } from 'moment';
 import { DushboardFilterMod } from '../screens/Dashboard/Dushboard.models';
 import { IRequest, IRequestFullData } from './../models/request.models';
@@ -27,6 +28,11 @@ export const getRequests = async ({ filter }: IRequestOptions) => {
   }
 };
 
+export const getRequestById = async (requestId: number) => {
+  const allRequests = await getRequests({});
+  return allRequests.find(({ id }) => requestId === id);
+};
+
 export const getRequestsForMonth = async (date: Moment) => {
   const allRequests = await getRequests({});
 
@@ -37,6 +43,21 @@ export const getRequestsForMonth = async (date: Moment) => {
   );
 };
 
+export const editRequestById = async (
+  requestsId: number,
+  request: IRequest
+) => {
+  await deleteById(requestsId);
+  return addNewRequest(request);
+};
+
+export const deleteById = async (requestsId: number) => {
+  const allRequests = await getRequests({});
+  const newRequests = allRequests.filter(({ id }) => id !== requestsId);
+  localStorage.setItem('requests', JSON.stringify(newRequests));
+  return;
+};
+
 export const addNewRequest = async (request: IRequest) => {
   const allRequests = await getRequests({});
   const newRequests = [
@@ -44,7 +65,7 @@ export const addNewRequest = async (request: IRequest) => {
     {
       ...request,
       id: moment().unix(),
-      actions: moment().format('YYYY-MM-DD HH:mm:ss'),
+      actions: moment().format(MomentDateTimeFormat.SPAСE_FULL_FORMAT),
     },
   ];
   localStorage.setItem('requests', JSON.stringify(newRequests));

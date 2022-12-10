@@ -6,6 +6,7 @@ import { IRequestFullData } from '../../../models/request.models';
 import { getRequests } from '../../../service/vacationsRequestService';
 import { DushboardFilterMod } from '../Dushboard.models';
 import { MomentDateTimeFormat } from '../../../models/moment.models';
+import { useNavigate } from 'react-router-dom';
 
 const TABLE_COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'Absence ID', width: 130 },
@@ -49,6 +50,7 @@ interface ITableViewProps {
 export const DushBoardTableView: FC<ITableViewProps> = ({ filter }) => {
   const [tableRows, setTableRows] = useState<IRequestFullData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserRequest = async () => {
@@ -82,6 +84,7 @@ export const DushBoardTableView: FC<ITableViewProps> = ({ filter }) => {
 
   return (
     <DataGrid
+      onCellClick={({ id }) => navigate(`/vacation/request/${id}`)}
       rows={tableRows}
       columns={TABLE_COLUMNS}
       pageSize={5}

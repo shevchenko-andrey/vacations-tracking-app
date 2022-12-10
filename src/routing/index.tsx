@@ -5,6 +5,7 @@ import RequireAuth from './require-auth';
 const LoginPage = lazy(() => import('../screens/Login'));
 const DashboardPage = lazy(() => import('../screens/Dashboard'));
 const RequestPage = lazy(() => import('../screens/Request'));
+const RequestEditPage = lazy(() => import('../screens/RequestEdit'));
 
 function MainRouter() {
   return (
@@ -34,7 +35,7 @@ function MainRouter() {
           path="/vacation/request/:requestId"
           element={
             <RequireAuth>
-              <RequestPage />
+              <RequestEditPage />
             </RequireAuth>
           }
         />
