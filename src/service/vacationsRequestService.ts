@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { DushboardFilterMod } from '../screens/Dashboard/Dushboard.models';
 import { IRequest, IRequestFullData } from './../models/request.models';
 
@@ -25,6 +25,16 @@ export const getRequests = async ({ filter }: IRequestOptions) => {
     default:
       return requests;
   }
+};
+
+export const getRequestsForMonth = async (date: Moment) => {
+  const allRequests = await getRequests({});
+
+  return allRequests.filter(
+    ({ endDate, startDate }) =>
+      moment(endDate).isSame(date, 'month') ||
+      moment(startDate).isSame(date, 'month')
+  );
 };
 
 export const addNewRequest = async (request: IRequest) => {

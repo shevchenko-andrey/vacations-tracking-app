@@ -7,10 +7,11 @@ import { Box, Fab, Typography, Button } from '@mui/material';
 import { DushBoardTableView } from './DushboardTableView';
 import { DushBoardCalendarView } from './DushboardCalendarView';
 import { DushboardTogglePannel } from './DushboardTogglePannel';
+import moment, { Moment } from 'moment';
+import { DushboardDateControl } from './DushboardDateControl';
 
 const Dashboard = () => {
-  // TODO: Add Datapicker
-  // const [selectedDay, setSelectedDay] = useState<Moment>(moment());
+  const [selectedDate, setSelectedDate] = useState<Moment>(moment());
   const [filter, setFilter] = useState(DushboardFilterMod.ACTUAL);
   const [selectedView, setSelectedView] = useState(
     DashboardDataView.TABLE_VIEW
@@ -42,7 +43,12 @@ const Dashboard = () => {
               filter={filter}
               handleToggleFilter={handleToggleFilter}
             />
-          ) : null}
+          ) : (
+            <DushboardDateControl
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+            />
+          )}
           <Box>
             <Fab
               component={Link}
@@ -67,7 +73,7 @@ const Dashboard = () => {
           {selectedView === DashboardDataView.TABLE_VIEW ? (
             <DushBoardTableView filter={filter} />
           ) : (
-            <DushBoardCalendarView />
+            <DushBoardCalendarView selectedDate={selectedDate} />
           )}
         </Box>
       </Box>

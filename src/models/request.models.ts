@@ -1,13 +1,13 @@
 import { Moment } from 'moment';
 
-export interface IRequest {
+export interface IRequest<D = Moment> {
   type: string;
-  startDate: Moment;
-  endDate: Moment;
+  startDate: D;
+  endDate: D;
   notes: string;
 }
 
-export interface IRequestFullData extends IRequest {
+export interface IRequestFullData extends IRequest<string> {
   id: number;
-  actions: Moment;
+  actions: string;
 }

@@ -30,6 +30,15 @@ function MainRouter() {
           }
         />
 
+        <Route
+          path="/vacation/request/:requestId"
+          element={
+            <RequireAuth>
+              <RequestPage />
+            </RequireAuth>
+          }
+        />
+
         <Route path="*" element={<Navigate to="/login" />} />
       </Routes>
     </Suspense>

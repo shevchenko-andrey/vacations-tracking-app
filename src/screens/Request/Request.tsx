@@ -15,6 +15,7 @@ import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { TextareaAutosize } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import { MomentDateTimeFormat } from '../../models/moment.models';
 
 const requestSchema = Yup.object().shape({
   type: Yup.string().min(2).max(10).required(),
@@ -77,7 +78,7 @@ const Request = () => {
                   <LocalizationProvider dateAdapter={AdapterMoment}>
                     <DesktopDatePicker
                       label="Start Date"
-                      inputFormat="MM/DD/YYYY"
+                      inputFormat={MomentDateTimeFormat.DOT_FORMAT}
                       value={formik.values.startDate}
                       onChange={value =>
                         formik.setFieldValue('startDate', value)
@@ -93,7 +94,7 @@ const Request = () => {
                     />
                     <DesktopDatePicker
                       label="End Date"
-                      inputFormat="MM/DD/YYYY"
+                      inputFormat={MomentDateTimeFormat.DOT_FORMAT}
                       value={formik.values.endDate}
                       onChange={value => formik.setFieldValue('endDate', value)}
                       renderInput={params => (
