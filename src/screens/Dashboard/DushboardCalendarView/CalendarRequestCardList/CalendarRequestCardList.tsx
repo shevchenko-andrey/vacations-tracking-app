@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Typography, Box } from '@mui/material';
 import { IRequestFullData } from '../../../../models/request.models';
-import { Link } from 'react-router-dom';
 
 interface IRequestCardListProps {
   requestData: IRequestFullData[];
@@ -16,19 +15,16 @@ export const CalendarRequestCardList: FC<IRequestCardListProps> = ({
     <>
       {requestData.length === 0 ? (
         <Box
-          display="flex"
-          justifyContent="center"
+          top="0"
+          left="0"
+          width="100%"
+          height="100%"
           sx={{
             cursor: 'pointer',
-            opacity: 0,
-            ':hover': {
-              opacity: 1,
-            },
           }}
           onClick={() => navigate('/vacation/request/')}
-        >
-          New request
-        </Box>
+          position="absolute"
+        ></Box>
       ) : (
         requestData.map(({ id, type }) => (
           <Box
@@ -37,7 +33,7 @@ export const CalendarRequestCardList: FC<IRequestCardListProps> = ({
             mt="10px"
             sx={{ cursor: 'pointer' }}
           >
-            <Typography>{type}</Typography>
+            <Typography textAlign="center">{type}</Typography>
           </Box>
         ))
       )}

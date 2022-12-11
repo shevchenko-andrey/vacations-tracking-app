@@ -23,7 +23,7 @@ function MainRouter() {
         />
 
         <Route
-          path="/vacation/request"
+          path="/vacation/request/"
           element={
             <RequireAuth>
               <RequestPage />

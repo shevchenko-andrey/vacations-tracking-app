@@ -3,7 +3,14 @@ import React, { SetStateAction, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from '../../shared/Layout';
 import { DushboardFilterMod, DashboardDataView } from './Dushboard.models';
-import { Box, Fab, Typography, Button } from '@mui/material';
+import {
+  Box,
+  Fab,
+  Typography,
+  Button,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import { DushBoardTableView } from './DushboardTableView';
 import { DushBoardCalendarView } from './DushboardCalendarView';
 import { DushboardTogglePannel } from './DushboardTogglePannel';
@@ -16,6 +23,8 @@ const Dashboard = () => {
   const [selectedView, setSelectedView] = useState(
     DashboardDataView.TABLE_VIEW
   );
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleToggleFilter = (
     _: React.MouseEvent<HTMLElement>,
@@ -32,9 +41,12 @@ const Dashboard = () => {
 
   return (
     <Layout title="Dashboard">
-      <Box component="section" pt="30px" pb="30px">
+      <Box component="section" pb="60px" pt="30px">
         <Box
           display={'flex'}
+          mt="30px"
+          mb="30px"
+          position="relative"
           justifyContent={'space-between'}
           alignItems="center"
         >
@@ -49,27 +61,32 @@ const Dashboard = () => {
               setSelectedDate={setSelectedDate}
             />
           )}
-          <Box>
-            <Fab
-              component={Link}
-              to="/vacation/request"
-              color="primary"
-              variant="extended"
-              aria-label="add"
-            >
-              <AddIcon />
-              <Box pr="20px" pl="20px">
-                <Typography>New request</Typography>
-              </Box>
-            </Fab>
-          </Box>
+          {!isMobile && (
+            <Box top={30} left="50%">
+              <Fab
+                component={Link}
+                to="/vacation/request"
+                color="primary"
+                variant="extended"
+                aria-label="add"
+              >
+                <AddIcon />
+                <Box pr="10px" pl="10px">
+                  <Typography>New request</Typography>
+                </Box>
+              </Fab>
+            </Box>
+          )}
+
           <Box>
             <Button variant="contained" onClick={handleChangeView}>
-              {DashboardDataView.CALENDAR_VIEW}
+              {selectedView === DashboardDataView.CALENDAR_VIEW
+                ? DashboardDataView.TABLE_VIEW
+                : DashboardDataView.CALENDAR_VIEW}
             </Button>
           </Box>
         </Box>
-        <Box overflow="auto" pt="30px" height="400px" width="100%">
+        <Box overflow="auto" height="400px" width="100%">
           {selectedView === DashboardDataView.TABLE_VIEW ? (
             <DushBoardTableView filter={filter} />
           ) : (
@@ -77,6 +94,22 @@ const Dashboard = () => {
           )}
         </Box>
       </Box>
+      {isMobile && (
+        <Box>
+          <Fab
+            component={Link}
+            to="/vacation/request"
+            color="primary"
+            variant="extended"
+            aria-label="add"
+          >
+            <AddIcon />
+            <Box pr="10px" pl="10px">
+              <Typography>New request</Typography>
+            </Box>
+          </Fab>
+        </Box>
+      )}
     </Layout>
   );
 };

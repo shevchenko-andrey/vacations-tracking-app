@@ -2,20 +2,20 @@ import Box from '@mui/material/Box';
 import { IRequest } from '../../models/request.models';
 import moment from 'moment';
 import {
-  editRequestById,
   getRequestById,
+  editRequestById,
+  deleteRequestById,
 } from '../../service/vacationsRequestService';
 import { Layout } from '../../shared/Layout';
-import { Container } from '@mui/system';
 import { useNavigate, useParams } from 'react-router-dom';
 import { RequestForm } from '../../shared/RequestForm/RequestForm';
 import { useEffect, useState } from 'react';
-import { Skeleton } from '@mui/material';
+import { Button, Skeleton } from '@mui/material';
 
 const RequestEdit = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [isLoading, setIsloading] = useState(false);
+  const [isLoading, setIsloading] = useState(true);
   const [initialValues, setInitialValues] = useState<IRequest>({
     type: '',
     startDate: moment(),
@@ -37,8 +37,8 @@ const RequestEdit = () => {
         endDate: moment(endDate),
       });
     };
+
     try {
-      setIsloading(true);
       fetchInitialValues(Number(params.requestId));
       setIsloading(false);
     } catch (error) {
@@ -52,23 +52,37 @@ const RequestEdit = () => {
     navigate('/dushboard');
   };
 
+  const handleDeleteRequest = async () => {
+    await deleteRequestById(Number(params.requestId));
+    navigate('/dushboard');
+  };
+
   return (
     <Layout
       title={`Edit request #${params.requestId}`}
       backLinkPath={'/dushboard'}
     >
-      <Container>
-        <Box display="flex" justifyContent="center">
-          {isLoading ? (
-            <Skeleton />
-          ) : (
+      <Box pt="60px" display="flex" justifyContent="center">
+        {isLoading ? (
+          <Skeleton />
+        ) : (
+          <Box>
             <RequestForm
               initialValues={initialValues}
               handleSubmit={handleSubmit}
             />
-          )}
-        </Box>
-      </Container>
+            <Box display="flex" justifyContent="flex-end">
+              <Button
+                color="error"
+                variant="outlined"
+                onClick={handleDeleteRequest}
+              >
+                Delete
+              </Button>
+            </Box>
+          </Box>
+        )}
+      </Box>
     </Layout>
   );
 };

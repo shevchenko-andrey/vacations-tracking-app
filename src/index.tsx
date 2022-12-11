@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/vacations-tracking-app/">
       <App />
     </BrowserRouter>
   </React.StrictMode>

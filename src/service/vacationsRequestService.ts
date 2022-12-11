@@ -47,11 +47,11 @@ export const editRequestById = async (
   requestsId: number,
   request: IRequest
 ) => {
-  await deleteById(requestsId);
+  await deleteRequestById(requestsId);
   return addNewRequest(request);
 };
 
-export const deleteById = async (requestsId: number) => {
+export const deleteRequestById = async (requestsId: number) => {
   const allRequests = await getRequests({});
   const newRequests = allRequests.filter(({ id }) => id !== requestsId);
   localStorage.setItem('requests', JSON.stringify(newRequests));
