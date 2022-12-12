@@ -1,15 +1,20 @@
+import * as Yup from 'yup';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import { Navigate } from 'react-router-dom';
+import moment from 'moment';
+
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { IRequest } from '../../models/request.models';
 import { addNewRequest } from '../../service/vacationsRequestService';
 import { Layout } from '../../shared/Layout';
 import { Container } from '@mui/system';
-import Grid from '@mui/material/Grid';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
 import { TextareaAutosize } from '@mui/material';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 
 const requestSchema = Yup.object().shape({
   type: Yup.string().min(2).max(10).required(),
@@ -18,7 +23,8 @@ const requestSchema = Yup.object().shape({
   notes: Yup.string(),
 });
 
-export default function Request() {
+const Request = () => {
+  const navigate = useNavigate();
   const handleSubmit = async (values: IRequest) => {
     await addNewRequest(values);
   };
@@ -26,21 +32,22 @@ export default function Request() {
   const formik = useFormik({
     initialValues: {
       type: '',
-      startDate: new Date(),
-      endDate: new Date(),
+      startDate: moment(),
+      endDate: moment(),
       notes: '',
     },
 
     validationSchema: requestSchema,
 
-    onSubmit: (values, actions) => {
-      handleSubmit(values);
+    onSubmit: async (values, actions) => {
+      await handleSubmit(values);
       actions.resetForm();
+      navigate('/bushboard');
     },
   });
 
   return (
-    <Layout title="Request new vacantions">
+    <Layout title="Request new vacantions" backLinkPath={'/dushboard'}>
       <Container>
         <Box display="flex" justifyContent="center">
           <Box
@@ -67,44 +74,38 @@ export default function Request() {
                     error={formik.touched.type && Boolean(formik.errors.type)}
                     helperText={formik.touched.type && formik.errors.type}
                   />
-
-                  <TextField
-                    type="date"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="startDate"
-                    label="Start Date"
-                    id="startDate"
-                    onChange={formik.handleChange}
-                    value={formik.values.startDate}
-                    error={
-                      formik.touched.startDate &&
-                      Boolean(formik.errors.startDate)
-                    }
-                    helperText={
-                      formik.touched.startDate &&
-                      Boolean(formik.errors.startDate)
-                    }
-                  ></TextField>
-
-                  <TextField
-                    type="date"
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="endDate"
-                    label="End Date"
-                    id="endDate"
-                    onChange={formik.handleChange}
-                    value={formik.values.endDate}
-                    error={
-                      formik.touched.endDate && Boolean(formik.errors.endDate)
-                    }
-                    helperText={
-                      formik.touched.endDate && Boolean(formik.errors.endDate)
-                    }
-                  ></TextField>
+                  <LocalizationProvider dateAdapter={AdapterMoment}>
+                    <DesktopDatePicker
+                      label="Start Date"
+                      inputFormat="MM/DD/YYYY"
+                      value={formik.values.startDate}
+                      onChange={value =>
+                        formik.setFieldValue('startDate', value)
+                      }
+                      renderInput={params => (
+                        <TextField
+                          fullWidth
+                          margin="normal"
+                          required
+                          {...params}
+                        />
+                      )}
+                    />
+                    <DesktopDatePicker
+                      label="End Date"
+                      inputFormat="MM/DD/YYYY"
+                      value={formik.values.endDate}
+                      onChange={value => formik.setFieldValue('endDate', value)}
+                      renderInput={params => (
+                        <TextField
+                          fullWidth
+                          margin="normal"
+                          required
+                          {...params}
+                        />
+                      )}
+                    />
+                  </LocalizationProvider>
 
                   <Button
                     type="submit"
@@ -132,7 +133,8 @@ export default function Request() {
           </Box>
         </Box>
       </Container>
-      {formik.isSubmitting && <Navigate to="/dushboard" />}
     </Layout>
   );
-}
+};
+
+export default Request;

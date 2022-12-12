@@ -1,9 +1,9 @@
 import moment from 'moment';
-import { FilterMod } from '../screens/Dashboard/Dushboard.models';
-import { IRequest } from './../models/request.models';
+import { DushboardFilterMod } from '../screens/Dashboard/Dushboard.models';
+import { IRequest, IRequestFullData } from './../models/request.models';
 
 interface IRequestOptions {
-  filter?: FilterMod;
+  filter?: DushboardFilterMod;
 }
 
 export const getRequests = async ({ filter }: IRequestOptions) => {
@@ -11,14 +11,14 @@ export const getRequests = async ({ filter }: IRequestOptions) => {
   if (!data) {
     return [];
   }
-  const requests = JSON.parse(data) as IRequest[];
+  const requests = JSON.parse(data) as IRequestFullData[];
 
   switch (filter) {
-    case FilterMod.ACTUAL:
+    case DushboardFilterMod.ACTUAL:
       return requests.filter(({ endDate }) =>
         moment(endDate).isAfter(moment())
       );
-    case FilterMod.HISTORY:
+    case DushboardFilterMod.HISTORY:
       return requests.filter(({ endDate }) =>
         moment(endDate).isBefore(moment())
       );
@@ -31,7 +31,11 @@ export const addNewRequest = async (request: IRequest) => {
   const allRequests = await getRequests({});
   const newRequests = [
     ...allRequests,
-    { ...request, id: moment(request.endDate).unix() },
+    {
+      ...request,
+      id: moment().unix(),
+      actions: moment().format('YYYY-MM-DD HH:mm:ss'),
+    },
   ];
   localStorage.setItem('requests', JSON.stringify(newRequests));
   return request;

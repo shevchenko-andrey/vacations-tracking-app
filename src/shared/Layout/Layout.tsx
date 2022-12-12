@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { Header } from '../Header';
 import { useUserContext } from '../../contexts/UserContext';
 import { Container } from '@mui/material';
@@ -5,9 +6,10 @@ import { Container } from '@mui/material';
 interface ILayoutProps {
   title: string;
   children: React.ReactNode;
+  backLinkPath?: string;
 }
 
-export const Layout = ({ title, children }: ILayoutProps) => {
+export const Layout: FC<ILayoutProps> = ({ title, children, backLinkPath }) => {
   const { email, handleLogOut, isLoggedIn } = useUserContext();
 
   return (
@@ -17,6 +19,7 @@ export const Layout = ({ title, children }: ILayoutProps) => {
         email={email}
         handleLogOut={handleLogOut}
         title={title}
+        backLinkPath={backLinkPath}
       />
 
       <Container component="main">{children}</Container>

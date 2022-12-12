@@ -1,18 +1,26 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Toolbar from '@mui/material/Toolbar';
-import { Box, Button, Popover, Avatar } from '@mui/material';
+import { Box, Button, Popover, IconButton, Avatar, Fab } from '@mui/material';
 
 interface IHeaderProps {
   auth: boolean;
   title: string;
   email: string;
+  backLinkPath?: string;
   handleLogOut: () => void;
 }
 
-export const Header = ({ title, auth, email, handleLogOut }: IHeaderProps) => {
+export const Header: FC<IHeaderProps> = ({
+  title,
+  auth,
+  email,
+  handleLogOut,
+  backLinkPath,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -29,6 +37,18 @@ export const Header = ({ title, auth, email, handleLogOut }: IHeaderProps) => {
   return (
     <AppBar position="static">
       <Toolbar>
+        <Box>
+          {backLinkPath && (
+            <Fab
+              component={Link}
+              to={backLinkPath}
+              color="secondary"
+              variant="circular"
+            >
+              <ArrowBackIcon />
+            </Fab>
+          )}
+        </Box>
         <Typography
           textAlign="center"
           variant="h6"
