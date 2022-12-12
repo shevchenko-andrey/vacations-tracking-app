@@ -1,6 +1,6 @@
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 
-export interface IRequest<D = Moment> {
+export interface IRequest<D = Dayjs> {
   type: string;
   startDate: D;
   endDate: D;

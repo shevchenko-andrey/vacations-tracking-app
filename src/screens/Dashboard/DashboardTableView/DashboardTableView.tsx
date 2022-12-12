@@ -1,12 +1,16 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import { Box, Skeleton, Typography } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
 import { IRequestFullData } from '../../../models/request.models';
 import { getRequests } from '../../../service/vacationsRequestService';
-import { DushboardFilterMod } from '../Dushboard.models';
-import { MomentDateTimeFormat } from '../../../models/moment.models';
+import { DashboardFilterMod } from '../Dashboard.models';
+import { DateTimeFormat } from '../../../models/dayjs.models';
 import { useNavigate } from 'react-router-dom';
+
+interface ITableViewProps {
+  filter: DashboardFilterMod;
+}
 
 const TABLE_COLUMNS: GridColDef[] = [
   { field: 'id', headerName: 'Absence ID', width: 130 },
@@ -17,7 +21,7 @@ const TABLE_COLUMNS: GridColDef[] = [
     width: 130,
     valueGetter: (
       params: GridValueGetterParams<GridColDef, IRequestFullData>
-    ) => moment(params.row.startDate).format(MomentDateTimeFormat.DOT_FORMAT),
+    ) => dayjs(params.row.startDate).format(DateTimeFormat.DOT_FORMAT),
   },
   {
     field: 'endDate',
@@ -25,7 +29,7 @@ const TABLE_COLUMNS: GridColDef[] = [
     width: 130,
     valueGetter: (
       params: GridValueGetterParams<GridColDef, IRequestFullData>
-    ) => moment(params.row.endDate).format(MomentDateTimeFormat.DOT_FORMAT),
+    ) => dayjs(params.row.endDate).format(DateTimeFormat.DOT_FORMAT),
   },
   {
     field: 'notes',
@@ -38,16 +42,11 @@ const TABLE_COLUMNS: GridColDef[] = [
     width: 260,
     valueGetter: (
       params: GridValueGetterParams<GridColDef, IRequestFullData>
-    ) =>
-      moment(params.row.actions).format(MomentDateTimeFormat.SPAСE_FULL_FORMAT),
+    ) => dayjs(params.row.actions).format(DateTimeFormat.SPAСE_FULL_FORMAT),
   },
 ];
 
-interface ITableViewProps {
-  filter: DushboardFilterMod;
-}
-
-export const DushBoardTableView: FC<ITableViewProps> = ({ filter }) => {
+export const DashboardTableView: FC<ITableViewProps> = ({ filter }) => {
   const [tableRows, setTableRows] = useState<IRequestFullData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();

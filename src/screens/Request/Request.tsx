@@ -2,13 +2,12 @@ import Box from '@mui/material/Box';
 import { IRequest } from '../../models/request.models';
 import { addNewRequest } from '../../service/vacationsRequestService';
 import { Layout } from '../../shared/Layout';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RequestForm } from '../../shared/RequestForm/RequestForm';
 
 const Request = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location);
+
   const handleSubmit = async (values: IRequest) => {
     await addNewRequest(values);
     navigate('/dushboard');

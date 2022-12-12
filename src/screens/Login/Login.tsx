@@ -89,7 +89,7 @@ const Login = () => {
           </Button>
         </Box>
       </Box>
-      {isLoggedIn && <Navigate to="/dushboard" />}
+      {isLoggedIn && <Navigate to="/dashboard" />}
     </Container>
   );
 };

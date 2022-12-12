@@ -1,4 +1,4 @@
-export enum MomentDateTimeFormat {
+export enum DateTimeFormat {
   DOT_FORMAT = 'DD.MM.YYYY',
   DAY = 'D',
   SHORT_DAY_OF_WEEK = 'ddd',

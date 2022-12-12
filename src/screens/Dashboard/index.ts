@@ -1,1 +1,1 @@
-export { default } from './Dushboard';
+export { default } from './Dashboard';

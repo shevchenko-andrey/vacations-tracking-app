@@ -14,7 +14,7 @@ function MainRouter() {
         <Route path="/login" element={<LoginPage />} />
 
         <Route
-          path="/dushboard"
+          path="/dashboard"
           element={
             <RequireAuth>
               <DashboardPage />

@@ -1,17 +1,17 @@
 import { FC } from 'react';
 import * as Yup from 'yup';
-import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
-import { TextareaAutosize, useMediaQuery } from '@mui/material';
+import dayjs from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TextareaAutosize } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
-import { MomentDateTimeFormat } from '../../models/moment.models';
+import { DateTimeFormat } from '../../models/dayjs.models';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import moment from 'moment';
 import { useFormik } from 'formik';
 import { IRequest } from '../../models/request.models';
-import { useTheme } from '@mui/system';
+import { useCheckBreakpoint } from '../../hooks/useCheckBreakpoint';
 
 const requestSchema = Yup.object().shape({
   type: Yup.string().min(2).max(20).required(),
@@ -29,13 +29,12 @@ export const RequestForm: FC<IRequestFormProps> = ({
   handleSubmit,
   initialValues,
 }) => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const { isMobile, isDesktop } = useCheckBreakpoint();
   const formik = useFormik({
     initialValues: initialValues ?? {
       type: '',
-      startDate: moment(),
-      endDate: moment(),
+      startDate: dayjs(),
+      endDate: dayjs(),
       notes: '',
     },
 
@@ -54,7 +53,6 @@ export const RequestForm: FC<IRequestFormProps> = ({
       noValidate
       display="flex"
       justifyContent="space-between"
-      sx={{ m: '0 auto' }}
     >
       <Box>
         <TextField
@@ -69,21 +67,22 @@ export const RequestForm: FC<IRequestFormProps> = ({
           error={formik.touched.type && Boolean(formik.errors.type)}
           helperText={formik.touched.type && formik.errors.type}
         />
-        <LocalizationProvider dateAdapter={AdapterMoment}>
+
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
           <SelectedDatePicker
             label="Start Date"
-            inputFormat={MomentDateTimeFormat.DOT_FORMAT}
+            inputFormat={DateTimeFormat.DOT_FORMAT}
             value={formik.values.startDate}
-            onChange={value => formik.setFieldValue('startDate', value)}
+            onChange={date => formik.setFieldValue('startDate', date)}
             renderInput={params => (
               <TextField fullWidth margin="normal" required {...params} />
             )}
           />
           <SelectedDatePicker
             label="End Date"
-            inputFormat={MomentDateTimeFormat.DOT_FORMAT}
+            inputFormat={DateTimeFormat.DOT_FORMAT}
             value={formik.values.endDate}
-            onChange={value => formik.setFieldValue('endDate', value)}
+            onChange={date => formik.setFieldValue('endDate', date)}
             renderInput={params => (
               <TextField fullWidth margin="normal" required {...params} />
             )}
@@ -114,7 +113,7 @@ export const RequestForm: FC<IRequestFormProps> = ({
           Submit
         </Button>
       </Box>
-      {!isMobile && (
+      {isDesktop && (
         <TextareaAutosize
           id="notes"
           style={{

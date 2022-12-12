@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import { IRequest } from '../../models/request.models';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import {
   getRequestById,
   editRequestById,
@@ -18,8 +18,8 @@ const RequestEdit = () => {
   const [isLoading, setIsloading] = useState(true);
   const [initialValues, setInitialValues] = useState<IRequest>({
     type: '',
-    startDate: moment(),
-    endDate: moment(),
+    startDate: dayjs(),
+    endDate: dayjs(),
     notes: '',
   });
 
@@ -33,8 +33,8 @@ const RequestEdit = () => {
       setInitialValues({
         type,
         notes,
-        startDate: moment(startDate),
-        endDate: moment(endDate),
+        startDate: dayjs(startDate),
+        endDate: dayjs(endDate),
       });
     };
 

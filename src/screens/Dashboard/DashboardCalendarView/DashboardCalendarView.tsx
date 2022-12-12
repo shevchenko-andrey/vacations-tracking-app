@@ -1,27 +1,24 @@
 import { FC } from 'react';
 import { Box } from '@mui/material';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 import { CalendarMonth } from './CalendarMonth';
 import { CalendarDaysOfWeek } from './CalendarDaysOfWeek';
-
-const AMOUNT_OF_DAY = 42;
+import { createArrayOfDay } from '../../../helpers/createArrayOfDay';
 
 interface CalendarViewProps {
-  selectedDate: Moment;
+  selectedDate: Dayjs;
 }
 
-export const DushBoardCalendarView: FC<CalendarViewProps> = ({
+const AMOUNT_OF_DAY_IN_CALENDAR = 42;
+
+export const DashBoardCalendarView: FC<CalendarViewProps> = ({
   selectedDate,
 }) => {
-  const startDayInstance = selectedDate
-    .clone()
-    .startOf('month')
-    .startOf('week')
-    .clone()
-    .subtract(1, 'day');
+  const startDayInstance = selectedDate.startOf('month').startOf('week');
 
-  const arrayOfDay = [...Array(AMOUNT_OF_DAY)].map(() =>
-    startDayInstance.add(1, 'day').clone()
+  const arrayOfDay = createArrayOfDay(
+    startDayInstance,
+    AMOUNT_OF_DAY_IN_CALENDAR
   );
 
   return (

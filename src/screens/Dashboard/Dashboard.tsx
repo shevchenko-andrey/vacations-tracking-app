@@ -2,33 +2,27 @@ import AddIcon from '@mui/icons-material/Add';
 import React, { SetStateAction, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout } from '../../shared/Layout';
-import { DushboardFilterMod, DashboardDataView } from './Dushboard.models';
-import {
-  Box,
-  Fab,
-  Typography,
-  Button,
-  useTheme,
-  useMediaQuery,
-} from '@mui/material';
-import { DushBoardTableView } from './DushboardTableView';
-import { DushBoardCalendarView } from './DushboardCalendarView';
-import { DushboardTogglePannel } from './DushboardTogglePannel';
-import moment, { Moment } from 'moment';
-import { DushboardDateControl } from './DushboardDateControl';
+import { DashboardFilterMod, DashboardDataView } from './Dashboard.models';
+import { Box, Fab, Typography, Button } from '@mui/material';
+import { DashboardTableView } from './DashboardTableView';
+import { DashBoardCalendarView } from './DashboardCalendarView';
+import { DashboardTogglePannel } from './DashboardTogglePannel';
+import dayjs, { Dayjs } from 'dayjs';
+import { DashboardDateControl } from './DashboardDateControl';
+import { useCheckBreakpoint } from '../../hooks/useCheckBreakpoint';
 
 const Dashboard = () => {
-  const [selectedDate, setSelectedDate] = useState<Moment>(moment());
-  const [filter, setFilter] = useState(DushboardFilterMod.ACTUAL);
+  const [selectedDate, setSelectedDate] = useState<Dayjs>(() => dayjs());
+  const [filter, setFilter] = useState(DashboardFilterMod.ACTUAL);
   const [selectedView, setSelectedView] = useState(
     DashboardDataView.TABLE_VIEW
   );
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const { isMobile, isDesktop } = useCheckBreakpoint();
 
   const handleToggleFilter = (
     _: React.MouseEvent<HTMLElement>,
-    filter: SetStateAction<DushboardFilterMod>
+    filter: SetStateAction<DashboardFilterMod>
   ) => {
     setFilter(filter);
   };
@@ -51,17 +45,17 @@ const Dashboard = () => {
           alignItems="center"
         >
           {selectedView === DashboardDataView.TABLE_VIEW ? (
-            <DushboardTogglePannel
+            <DashboardTogglePannel
               filter={filter}
               handleToggleFilter={handleToggleFilter}
             />
           ) : (
-            <DushboardDateControl
+            <DashboardDateControl
               selectedDate={selectedDate}
               setSelectedDate={setSelectedDate}
             />
           )}
-          {!isMobile && (
+          {isDesktop && (
             <Box top={30} left="50%">
               <Fab
                 component={Link}
@@ -88,9 +82,9 @@ const Dashboard = () => {
         </Box>
         <Box overflow="auto" height="400px" width="100%">
           {selectedView === DashboardDataView.TABLE_VIEW ? (
-            <DushBoardTableView filter={filter} />
+            <DashboardTableView filter={filter} />
           ) : (
-            <DushBoardCalendarView selectedDate={selectedDate} />
+            <DashBoardCalendarView selectedDate={selectedDate} />
           )}
         </Box>
       </Box>

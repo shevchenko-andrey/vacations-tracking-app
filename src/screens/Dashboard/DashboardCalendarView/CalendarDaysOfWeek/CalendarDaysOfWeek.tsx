@@ -1,29 +1,26 @@
 import { FC } from 'react';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 import * as Styled from './CalendarDaysOfWeek.styled';
-import { MomentDateTimeFormat } from '../../../../models/moment.models';
+import { DateTimeFormat } from '../../../../models/dayjs.models';
+import { createArrayOfDay } from '../../../../helpers/createArrayOfDay';
 
 const AMOUNT_DAY_OF_WEEK = 7;
 
 interface IDayOfWeekProps {
-  startDayInstance: Moment;
+  startDayInstance: Dayjs;
 }
 
 export const CalendarDaysOfWeek: FC<IDayOfWeekProps> = ({
   startDayInstance,
 }) => {
-  const startDaysOfWeek = startDayInstance.clone();
-
-  const arrayDayOfWeek = [...Array(AMOUNT_DAY_OF_WEEK)].map(() =>
-    startDaysOfWeek.add(1, 'day').clone()
-  );
+  const arrayDayOfWeek = createArrayOfDay(startDayInstance, AMOUNT_DAY_OF_WEEK);
 
   return (
     <Styled.CalendarGridWrapper>
       {arrayDayOfWeek.map(day => {
         return (
           <Styled.CalendarDayOfWeek key={day.unix()}>
-            {day.format(MomentDateTimeFormat.SHORT_DAY_OF_WEEK)}
+            {day.format(DateTimeFormat.SHORT_DAY_OF_WEEK)}
           </Styled.CalendarDayOfWeek>
         );
       })}

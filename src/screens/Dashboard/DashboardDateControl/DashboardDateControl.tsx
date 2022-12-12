@@ -1,17 +1,17 @@
 import { FC } from 'react';
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 import { Box } from '@mui/system';
 import { ButtonGroup, IconButton } from '@mui/material';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import { MomentDateTimeFormat } from '../../../models/moment.models';
+import { DateTimeFormat } from '../../../models/dayjs.models';
 
 interface DateControlProps {
-  selectedDate: Moment;
-  setSelectedDate: (date: Moment) => void;
+  selectedDate: Dayjs;
+  setSelectedDate: (date: Dayjs) => void;
 }
 
-export const DushboardDateControl: FC<DateControlProps> = ({
+export const DashboardDateControl: FC<DateControlProps> = ({
   setSelectedDate,
   selectedDate,
 }) => {
@@ -37,7 +37,7 @@ export const DushboardDateControl: FC<DateControlProps> = ({
         </IconButton>
       </ButtonGroup>
       <Box ml="20px">
-        {selectedDate.format(MomentDateTimeFormat.SPACE_MONTH_YEAR_FORMAT)}
+        {selectedDate.format(DateTimeFormat.SPACE_MONTH_YEAR_FORMAT)}
       </Box>
     </Box>
   );

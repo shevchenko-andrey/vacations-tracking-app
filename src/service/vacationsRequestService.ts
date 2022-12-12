@@ -1,10 +1,10 @@
-import { MomentDateTimeFormat } from './../models/moment.models';
-import moment, { Moment } from 'moment';
-import { DushboardFilterMod } from '../screens/Dashboard/Dushboard.models';
+import { DateTimeFormat } from '../models/dayjs.models';
+import dayjs, { Dayjs } from 'dayjs';
+import { DashboardFilterMod } from '../screens/Dashboard/Dashboard.models';
 import { IRequest, IRequestFullData } from './../models/request.models';
 
 interface IRequestOptions {
-  filter?: DushboardFilterMod;
+  filter?: DashboardFilterMod;
 }
 
 export const getRequests = async ({ filter }: IRequestOptions) => {
@@ -15,14 +15,10 @@ export const getRequests = async ({ filter }: IRequestOptions) => {
   const requests = JSON.parse(data) as IRequestFullData[];
 
   switch (filter) {
-    case DushboardFilterMod.ACTUAL:
-      return requests.filter(({ endDate }) =>
-        moment(endDate).isAfter(moment())
-      );
-    case DushboardFilterMod.HISTORY:
-      return requests.filter(({ endDate }) =>
-        moment(endDate).isBefore(moment())
-      );
+    case DashboardFilterMod.ACTUAL:
+      return requests.filter(({ endDate }) => dayjs(endDate).isAfter(dayjs()));
+    case DashboardFilterMod.HISTORY:
+      return requests.filter(({ endDate }) => dayjs(endDate).isBefore(dayjs()));
     default:
       return requests;
   }
@@ -33,13 +29,13 @@ export const getRequestById = async (requestId: number) => {
   return allRequests.find(({ id }) => requestId === id);
 };
 
-export const getRequestsForMonth = async (date: Moment) => {
+export const getRequestsForMonth = async (date: Dayjs) => {
   const allRequests = await getRequests({});
 
   return allRequests.filter(
     ({ endDate, startDate }) =>
-      moment(endDate).isSame(date, 'month') ||
-      moment(startDate).isSame(date, 'month')
+      dayjs(endDate).isSame(date, 'month') ||
+      dayjs(startDate).isSame(date, 'month')
   );
 };
 
@@ -64,8 +60,8 @@ export const addNewRequest = async (request: IRequest) => {
     ...allRequests,
     {
       ...request,
-      id: moment().unix(),
-      actions: moment().format(MomentDateTimeFormat.SPAСE_FULL_FORMAT),
+      id: dayjs().unix(),
+      actions: dayjs().format(DateTimeFormat.SPAСE_FULL_FORMAT),
     },
   ];
   localStorage.setItem('requests', JSON.stringify(newRequests));
