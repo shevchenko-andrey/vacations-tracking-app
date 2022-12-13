@@ -6,9 +6,11 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import dayjs from 'dayjs';
 import updateLocale from 'dayjs/plugin/updateLocale';
+import isBetween from 'dayjs/plugin/isBetween';
 
 dayjs.extend(updateLocale);
 dayjs.updateLocale('en', { weekStart: 1 });
+dayjs.extend(isBetween);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

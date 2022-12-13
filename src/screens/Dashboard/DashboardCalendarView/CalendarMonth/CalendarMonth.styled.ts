@@ -1,13 +1,5 @@
 import { styled, Box } from '@mui/material';
 
-export const CalendarDay = styled(Box)({
-  padding: '10px',
-  color: '#fff',
-  backgroundColor: '#837373',
-  minHeight: '200px',
-  position: 'relative',
-});
-
 export const CalendarGridWrapper = styled(Box)({
   backgroundColor: '#ccc',
   display: 'grid',
