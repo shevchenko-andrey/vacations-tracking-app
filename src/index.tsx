@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './screens/App';
 import reportWebVitals from './reportWebVitals';
-import moment from 'moment';
 import './index.css';
+import dayjs from 'dayjs';
+import updateLocale from 'dayjs/plugin/updateLocale';
 
-moment.updateLocale('en', { week: { dow: 1 } });
+dayjs.extend(updateLocale);
+dayjs.updateLocale('en', { weekStart: 1 });
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <BrowserRouter basename="/">
+    <BrowserRouter basename="/vacations-tracking-app">
       <App />
     </BrowserRouter>
   </React.StrictMode>

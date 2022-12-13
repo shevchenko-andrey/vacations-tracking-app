@@ -1,16 +1,16 @@
 import { FC, SetStateAction } from 'react';
 import { ToggleButton, ToggleButtonGroup, Box } from '@mui/material';
-import { DushboardFilterMod } from '../Dushboard.models';
+import { DashboardFilterMod } from '../Dashboard.models';
 
 interface TogglePannelProps {
   filter: string;
   handleToggleFilter: (
     _: React.MouseEvent<HTMLElement>,
-    filter: SetStateAction<DushboardFilterMod>
+    filter: SetStateAction<DashboardFilterMod>
   ) => void;
 }
 
-export const DushboardTogglePannel: FC<TogglePannelProps> = ({
+export const DashboardTogglePannel: FC<TogglePannelProps> = ({
   filter,
   handleToggleFilter,
 }) => {

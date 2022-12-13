@@ -3,7 +3,7 @@ export enum DashboardDataView {
   CALENDAR_VIEW = 'calendar view',
 }
 
-export enum DushboardFilterMod {
+export enum DashboardFilterMod {
   ACTUAL = 'actual',
   HISTORY = 'history',
 }

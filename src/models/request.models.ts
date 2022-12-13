@@ -1,13 +1,13 @@
-import { Moment } from 'moment';
+import { Dayjs } from 'dayjs';
 
-export interface IRequest {
+export interface IRequest<D = Dayjs> {
   type: string;
-  startDate: Moment;
-  endDate: Moment;
+  startDate: D;
+  endDate: D;
   notes: string;
 }
 
-export interface IRequestFullData extends IRequest {
+export interface IRequestFullData extends IRequest<string> {
   id: number;
-  actions: Moment;
+  actions: string;
 }
