@@ -80,7 +80,7 @@ const Dashboard = () => {
             </Button>
           </Box>
         </Box>
-        <Box overflow="auto" height="400px" width="100%">
+        <Box>
           {selectedView === DashboardDataView.TABLE_VIEW ? (
             <DashboardTableView filter={filter} />
           ) : (
