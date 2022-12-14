@@ -60,7 +60,6 @@ export const DashboardTableView: FC<ITableViewProps> = ({ filter }) => {
       setIsLoading(true);
       fetchUserRequest();
     } catch (error) {
-      console.log(error);
     } finally {
       setIsLoading(false);
     }
@@ -88,7 +87,6 @@ export const DashboardTableView: FC<ITableViewProps> = ({ filter }) => {
       columns={TABLE_COLUMNS}
       pageSize={5}
       rowsPerPageOptions={[5]}
-      checkboxSelection
     />
   );
 };

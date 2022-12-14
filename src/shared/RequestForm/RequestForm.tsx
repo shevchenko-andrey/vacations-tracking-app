@@ -45,6 +45,10 @@ export const RequestForm: FC<IRequestFormProps> = ({
 
   const SelectedDatePicker = isMobile ? MobileDatePicker : DesktopDatePicker;
 
+  const maxDate = dayjs().add(365, 'days');
+
+  const minDate = dayjs().subtract(365, 'days');
+
   return (
     <Box
       component="form"
@@ -70,6 +74,8 @@ export const RequestForm: FC<IRequestFormProps> = ({
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <SelectedDatePicker
+            maxDate={maxDate}
+            minDate={minDate}
             label="Start Date"
             inputFormat={DateTimeFormat.DOT_FORMAT}
             value={formik.values.startDate}
@@ -79,6 +85,8 @@ export const RequestForm: FC<IRequestFormProps> = ({
             )}
           />
           <SelectedDatePicker
+            maxDate={maxDate}
+            minDate={minDate}
             label="End Date"
             inputFormat={DateTimeFormat.DOT_FORMAT}
             value={formik.values.endDate}
