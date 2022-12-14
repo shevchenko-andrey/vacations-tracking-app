@@ -37,12 +37,12 @@ const TABLE_COLUMNS: GridColDef[] = [
     width: 400,
   },
   {
-    field: 'actions',
-    headerName: 'Actions',
+    field: 'action',
+    headerName: 'Action',
     width: 260,
     valueGetter: (
       params: GridValueGetterParams<GridColDef, IRequestFullData>
-    ) => dayjs(params.row.actions).format(DateTimeFormat.SPAСE_FULL_FORMAT),
+    ) => dayjs(params.row.action).fromNow(),
   },
 ];
 
@@ -67,7 +67,7 @@ export const DashboardTableView: FC<ITableViewProps> = ({ filter }) => {
 
   if (isLoading) {
     return (
-      <Skeleton width={'100%'} component="div" height="400px">
+      <Skeleton width={'100%'} component="div" height="500px">
         <DataGrid rows={tableRows} columns={TABLE_COLUMNS} />
       </Skeleton>
     );
@@ -84,6 +84,7 @@ export const DashboardTableView: FC<ITableViewProps> = ({ filter }) => {
     <DataGrid
       onCellClick={({ id }) => navigate(`/vacation/request/${id}`)}
       rows={tableRows}
+      sx={{ overflow: 'auto', minHeight: '500px', width: '100%' }}
       columns={TABLE_COLUMNS}
       pageSize={5}
       rowsPerPageOptions={[5]}

@@ -2,7 +2,7 @@ import { FC } from 'react';
 import * as Yup from 'yup';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TextareaAutosize } from '@mui/material';
+import { TextareaAutosize, Select, InputLabel, MenuItem } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers';
 import { DateTimeFormat } from '../../models/dayjs.models';
@@ -10,13 +10,18 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { useFormik } from 'formik';
-import { IRequest } from '../../models/request.models';
+import { IRequest, VacationType } from '../../models/request.models';
 import { useCheckBreakpoint } from '../../hooks/useCheckBreakpoint';
 
 const requestSchema = Yup.object().shape({
   type: Yup.string().min(2).max(20).required(),
   startDate: Yup.date().required(),
-  endDate: Yup.date().required(),
+  endDate: Yup.date()
+    .min(
+      Yup.ref('startDate'),
+      'You cannot assign the end of the vacation before it starts'
+    )
+    .required(),
   notes: Yup.string(),
 });
 
@@ -32,9 +37,9 @@ export const RequestForm: FC<IRequestFormProps> = ({
   const { isMobile, isDesktop } = useCheckBreakpoint();
   const formik = useFormik({
     initialValues: initialValues ?? {
-      type: '',
-      startDate: dayjs(),
-      endDate: dayjs(),
+      type: VacationType.Sports_Vacation,
+      startDate: null,
+      endDate: null,
       notes: '',
     },
 
@@ -47,7 +52,7 @@ export const RequestForm: FC<IRequestFormProps> = ({
 
   const maxDate = dayjs().add(365, 'days');
 
-  const minDate = dayjs().subtract(365, 'days');
+  const minDate = dayjs();
 
   return (
     <Box
@@ -59,18 +64,43 @@ export const RequestForm: FC<IRequestFormProps> = ({
       justifyContent="space-between"
     >
       <Box>
-        <TextField
-          margin="normal"
-          required
-          fullWidth
-          id="type"
-          label="Vacation Type"
-          name="type"
-          onChange={formik.handleChange}
-          value={formik.values.type}
-          error={formik.touched.type && Boolean(formik.errors.type)}
-          helperText={formik.touched.type && formik.errors.type}
-        />
+        <Box>
+          <InputLabel margin="dense" id="select-label-type">
+            Type
+          </InputLabel>
+          <Select
+            fullWidth
+            placeholder="Type"
+            labelId="select-label-type"
+            id="vacation-type-select"
+            name="type"
+            value={formik.values.type}
+            onChange={formik.handleChange}
+          >
+            <MenuItem value={VacationType.Staycation}>Staycation</MenuItem>
+            <MenuItem value={VacationType.Sports_Vacation}>
+              Sports Vacation
+            </MenuItem>
+            <MenuItem value={VacationType.Cruise_Vacation}>
+              Cruise Vacation
+            </MenuItem>
+            <MenuItem value={VacationType.Volunteer_Vacation}>
+              Volunteer Vacation
+            </MenuItem>
+            <MenuItem value={VacationType.Beach_Vacation}>
+              Beach Vacation
+            </MenuItem>
+            <MenuItem value={VacationType.Camping_Vacation}>
+              Camping vacation
+            </MenuItem>
+            <MenuItem value={VacationType.Road_Trip_Vacation}>
+              Road Trip Vacation
+            </MenuItem>
+            <MenuItem value={VacationType.Sightseeing_Type_Of_Vacation}>
+              Sightseeing Type Of Vacation
+            </MenuItem>
+          </Select>
+        </Box>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <SelectedDatePicker
@@ -81,12 +111,25 @@ export const RequestForm: FC<IRequestFormProps> = ({
             value={formik.values.startDate}
             onChange={date => formik.setFieldValue('startDate', date)}
             renderInput={params => (
-              <TextField fullWidth margin="normal" required {...params} />
+              <TextField
+                error={
+                  formik.touched.startDate && Boolean(formik.errors.endDate)
+                }
+                helperText={
+                  formik.errors.endDate && formik.touched.startDate
+                    ? formik.errors.endDate
+                    : ''
+                }
+                fullWidth
+                margin="normal"
+                required
+                {...params}
+              />
             )}
           />
           <SelectedDatePicker
             maxDate={maxDate}
-            minDate={minDate}
+            minDate={formik.values.startDate}
             label="End Date"
             inputFormat={DateTimeFormat.DOT_FORMAT}
             value={formik.values.endDate}

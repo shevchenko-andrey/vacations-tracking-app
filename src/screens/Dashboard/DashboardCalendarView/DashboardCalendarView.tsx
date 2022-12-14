@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Box } from '@mui/material';
 import { Dayjs } from 'dayjs';
 import { CalendarMonth } from './CalendarMonth';
 import { CalendarDaysOfWeek } from './CalendarDaysOfWeek';
@@ -22,9 +21,9 @@ export const DashBoardCalendarView: FC<CalendarViewProps> = ({
   );
 
   return (
-    <Box>
+    <>
       <CalendarDaysOfWeek startDayInstance={startDayInstance} />
       <CalendarMonth selectedDate={selectedDate} arrayOfDay={arrayOfDay} />
-    </Box>
+    </>
   );
 };

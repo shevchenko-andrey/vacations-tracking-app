@@ -11,9 +11,7 @@ export const CalendarRequestCard: FC<IRequestCardProps> = ({ requestData }) => {
 
   return (
     <Box mt="10px">
-      <Typography textAlign="center">
-        {type.toLowerCase() || 'unknown type'}
-      </Typography>
+      <Typography textAlign="center">{type}</Typography>
     </Box>
   );
 };

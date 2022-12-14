@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import { IRequest } from '../../models/request.models';
+import { IRequest, VacationType } from '../../models/request.models';
 import dayjs from 'dayjs';
 import {
   getRequestById,
@@ -17,7 +17,7 @@ const RequestEdit = () => {
   const navigate = useNavigate();
   const [isLoading, setIsloading] = useState(true);
   const [initialValues, setInitialValues] = useState<IRequest>({
-    type: '',
+    type: VacationType.Staycation,
     startDate: dayjs(),
     endDate: dayjs(),
     notes: '',
