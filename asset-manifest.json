@@ -1,35 +1,35 @@
 {
   "files": {
     "main.css": "/vacations-tracking-app/static/css/main.e9f81467.css",
-    "main.js": "/vacations-tracking-app/static/js/main.97924823.js",
-    "static/js/258.9910a4c3.chunk.js": "/vacations-tracking-app/static/js/258.9910a4c3.chunk.js",
-    "static/js/422.a58d3532.chunk.js": "/vacations-tracking-app/static/js/422.a58d3532.chunk.js",
-    "static/js/174.a7ac73fe.chunk.js": "/vacations-tracking-app/static/js/174.a7ac73fe.chunk.js",
-    "static/js/394.09158eca.chunk.js": "/vacations-tracking-app/static/js/394.09158eca.chunk.js",
+    "main.js": "/vacations-tracking-app/static/js/main.b865618d.js",
+    "static/js/258.58a25fdc.chunk.js": "/vacations-tracking-app/static/js/258.58a25fdc.chunk.js",
+    "static/js/422.023263a8.chunk.js": "/vacations-tracking-app/static/js/422.023263a8.chunk.js",
+    "static/js/174.316cd70f.chunk.js": "/vacations-tracking-app/static/js/174.316cd70f.chunk.js",
+    "static/js/394.2168e746.chunk.js": "/vacations-tracking-app/static/js/394.2168e746.chunk.js",
     "static/js/787.abc116ff.chunk.js": "/vacations-tracking-app/static/js/787.abc116ff.chunk.js",
     "static/js/776.88f3b93d.chunk.js": "/vacations-tracking-app/static/js/776.88f3b93d.chunk.js",
-    "static/js/986.c1d56365.chunk.js": "/vacations-tracking-app/static/js/986.c1d56365.chunk.js",
-    "static/js/622.d1b6f430.chunk.js": "/vacations-tracking-app/static/js/622.d1b6f430.chunk.js",
+    "static/js/986.8260903a.chunk.js": "/vacations-tracking-app/static/js/986.8260903a.chunk.js",
+    "static/js/172.efff567c.chunk.js": "/vacations-tracking-app/static/js/172.efff567c.chunk.js",
     "static/js/166.a8f26471.chunk.js": "/vacations-tracking-app/static/js/166.a8f26471.chunk.js",
     "static/js/649.b518cece.chunk.js": "/vacations-tracking-app/static/js/649.b518cece.chunk.js",
-    "static/js/194.bb8adf8d.chunk.js": "/vacations-tracking-app/static/js/194.bb8adf8d.chunk.js",
+    "static/js/656.4c352068.chunk.js": "/vacations-tracking-app/static/js/656.4c352068.chunk.js",
     "index.html": "/vacations-tracking-app/index.html",
     "main.e9f81467.css.map": "/vacations-tracking-app/static/css/main.e9f81467.css.map",
-    "main.97924823.js.map": "/vacations-tracking-app/static/js/main.97924823.js.map",
-    "258.9910a4c3.chunk.js.map": "/vacations-tracking-app/static/js/258.9910a4c3.chunk.js.map",
-    "422.a58d3532.chunk.js.map": "/vacations-tracking-app/static/js/422.a58d3532.chunk.js.map",
-    "174.a7ac73fe.chunk.js.map": "/vacations-tracking-app/static/js/174.a7ac73fe.chunk.js.map",
-    "394.09158eca.chunk.js.map": "/vacations-tracking-app/static/js/394.09158eca.chunk.js.map",
+    "main.b865618d.js.map": "/vacations-tracking-app/static/js/main.b865618d.js.map",
+    "258.58a25fdc.chunk.js.map": "/vacations-tracking-app/static/js/258.58a25fdc.chunk.js.map",
+    "422.023263a8.chunk.js.map": "/vacations-tracking-app/static/js/422.023263a8.chunk.js.map",
+    "174.316cd70f.chunk.js.map": "/vacations-tracking-app/static/js/174.316cd70f.chunk.js.map",
+    "394.2168e746.chunk.js.map": "/vacations-tracking-app/static/js/394.2168e746.chunk.js.map",
     "787.abc116ff.chunk.js.map": "/vacations-tracking-app/static/js/787.abc116ff.chunk.js.map",
     "776.88f3b93d.chunk.js.map": "/vacations-tracking-app/static/js/776.88f3b93d.chunk.js.map",
-    "986.c1d56365.chunk.js.map": "/vacations-tracking-app/static/js/986.c1d56365.chunk.js.map",
-    "622.d1b6f430.chunk.js.map": "/vacations-tracking-app/static/js/622.d1b6f430.chunk.js.map",
+    "986.8260903a.chunk.js.map": "/vacations-tracking-app/static/js/986.8260903a.chunk.js.map",
+    "172.efff567c.chunk.js.map": "/vacations-tracking-app/static/js/172.efff567c.chunk.js.map",
     "166.a8f26471.chunk.js.map": "/vacations-tracking-app/static/js/166.a8f26471.chunk.js.map",
     "649.b518cece.chunk.js.map": "/vacations-tracking-app/static/js/649.b518cece.chunk.js.map",
-    "194.bb8adf8d.chunk.js.map": "/vacations-tracking-app/static/js/194.bb8adf8d.chunk.js.map"
+    "656.4c352068.chunk.js.map": "/vacations-tracking-app/static/js/656.4c352068.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e9f81467.css",
-    "static/js/main.97924823.js"
+    "static/js/main.b865618d.js"
   ]
 }
